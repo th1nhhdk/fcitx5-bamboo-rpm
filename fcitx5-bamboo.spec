@@ -34,7 +34,7 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.metainfo.xml
 
 
 %files
-%license LICENSES/LGPL-2.1-or-later.txt
+%license LICENSES/*
 %doc README
 %config %{_datarootdir}/fcitx5/addon/bamboo.conf
 %config %{_datarootdir}/fcitx5/inputmethod/bamboo.conf
