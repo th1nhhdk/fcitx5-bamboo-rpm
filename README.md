@@ -1,4 +1,5 @@
 # fcitx5-bamboo-rpm
+fcitx5-bamboo rpm spec
 
 https://copr.fedorainfracloud.org/coprs/th1nhhdk/fcitx5-bamboo/
 
