@@ -13,12 +13,12 @@ BuildRequires:  fcitx5-devel
 BuildRequires:  golang
 BuildRequires:  gettext
 
-%if %{is_opensuse} != 1
-BuildRequires:  gcc-g++
-BuildRequires:  libappstream-glib
-%else
+%if 0%{?is_opensuse}
 BuildRequires:  gcc-c++
 BuildRequires:  appstream-glib
+%else
+BuildRequires:  gcc-g++
+BuildRequires:  libappstream-glib
 %endif
 
 Requires:       fcitx5
@@ -46,10 +46,6 @@ appstream-util validate-relax --nonet %{buildroot}%{_datarootdir}/metainfo/*.met
 %config %{_datarootdir}/fcitx5/addon/bamboo.conf
 %config %{_datarootdir}/fcitx5/inputmethod/bamboo.conf
 
-%if %{is_opensuse} != 1
-%{_prefix}/lib/debug/usr/lib64/fcitx5/*
-%endif
-
 %{_libdir}/fcitx5/*
 %{_datarootdir}/fcitx5/bamboo/*
 %{_datarootdir}/icons/hicolor/scalable/apps/*
@@ -60,6 +56,7 @@ appstream-util validate-relax --nonet %{buildroot}%{_datarootdir}/metainfo/*.met
 %changelog
 * Sat Sep 02 2023 th1nhhdk <th1nhhdk@tutanota.com>
 - Added openSUSE support.
+- Debuginfo is moved to a separate package.
 
 * Mon Jul 24 2023 th1nhhdk <th1nhhdk@tutanota.com>
 - Initial release.
