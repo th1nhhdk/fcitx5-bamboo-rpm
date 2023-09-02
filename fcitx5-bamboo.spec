@@ -1,6 +1,6 @@
 Name:           fcitx5-bamboo
 Version:        1.0.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Bamboo (Vietnamese Input Method) engine support for Fcitx
 
 License:        LGPL-2.1-or-later
@@ -11,9 +11,16 @@ BuildRequires:  cmake
 BuildRequires:  extra-cmake-modules
 BuildRequires:  fcitx5-devel
 BuildRequires:  golang
-BuildRequires:  gcc-g++
 BuildRequires:  gettext
+
+%if %{is_opensuse} != 1
+BuildRequires:  gcc-g++
 BuildRequires:  libappstream-glib
+%else
+BuildRequires:  gcc-c++
+BuildRequires:  appstream-glib
+%endif
+
 Requires:       fcitx5
 
 %description
@@ -30,7 +37,7 @@ This package provides a Bamboo (Vietnamese Input Method) engine for Fcitx5, base
 
 %install
 %cmake_install
-appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.metainfo.xml
+appstream-util validate-relax --nonet %{buildroot}%{_datarootdir}/metainfo/*.metainfo.xml
 
 
 %files
@@ -38,14 +45,21 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.metainfo.xml
 %doc README
 %config %{_datarootdir}/fcitx5/addon/bamboo.conf
 %config %{_datarootdir}/fcitx5/inputmethod/bamboo.conf
+
+%if %{is_opensuse} != 1
 %{_prefix}/lib/debug/usr/lib64/fcitx5/*
+%endif
+
 %{_libdir}/fcitx5/*
 %{_datarootdir}/fcitx5/bamboo/*
 %{_datarootdir}/icons/hicolor/scalable/apps/*
 %{_datarootdir}/locale/*
-%{_metainfodir}/*
+%{_datarootdir}/metainfo/*
 
 
 %changelog
+* Sat Sep 02 2023 th1nhhdk <th1nhhdk@tutanota.com>
+- Added openSUSE support.
+
 * Mon Jul 24 2023 th1nhhdk <th1nhhdk@tutanota.com>
 - Initial release.
